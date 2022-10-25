@@ -11,9 +11,21 @@ datasource db {
 }
 
 model User {
-    id       String @id @default(uuid())
-    email    String @unique
-    password String
-    name     String
-    @@map("Users")
+  id       String    @id @default(uuid())
+  email    String    @unique
+  password String
+  name     String
+  projects Project[]
+
+  @@map("Users")
+}
+
+model Project {
+  id          String  @id @default(uuid())
+  name        String
+  description String
+  User        User?   @relation(fields: [userId], references: [id])
+  userId      String?
+
+  @@map("Projects")
 }

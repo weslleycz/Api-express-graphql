@@ -6,16 +6,25 @@ const Status = `type Status{
   has_error:Boolean
 }`;
 
+const LoginToken = `type Login{
+  token:String,
+  has_error:Boolean
+}`;
+
 export const schema = buildSchema(`
 ${User}
 
 ${Status}
+
+${LoginToken}
 
 type Query {
   listUsers: [User]
 }
 
 type Mutation {
-  createUser(name:String, email: String, password: String):Status
+  createUser(name:String, email: String, password: String):Status,
+  loginUser(email: String, password: String):Status,
+  createProject(name: String, description: String,userId: String):Status,
 }
 `);
